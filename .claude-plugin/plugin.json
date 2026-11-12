@@ -1,0 +1,8 @@
+{
+  "name": "reum",
+  "version": "0.1.0",
+  "description": "Project kickoff coach: interviews you about a new or existing project, writes the concept and implementation plan to docs/, helps you pick skills, designs a role-and-model workflow, then generates a short AGENTS.md and CLAUDE.md.",
+  "author": { "name": "kanjicool" },
+  "repository": "https://github.com/kanjicool/reum",
+  "keywords": ["kickoff", "onboarding", "agents-md", "workflow", "subagents", "skills"]
+}

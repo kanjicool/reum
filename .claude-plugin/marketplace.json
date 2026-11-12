@@ -1,0 +1,11 @@
+{
+  "name": "reum",
+  "owner": { "name": "kanjicool" },
+  "plugins": [
+    {
+      "name": "reum",
+      "source": "./",
+      "description": "Project kickoff coach that sets up docs, skills, agent workflow, AGENTS.md and CLAUDE.md."
+    }
+  ]
+}
