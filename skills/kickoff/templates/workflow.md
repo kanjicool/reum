@@ -30,6 +30,13 @@ Risky areas (stronger reviewer): <money, auth, data, public surface>
 - One task per session.
 - <work log rule>
 
+## Task tracking
+
+- Tracker: <GitHub Issues + Project "<board name>" (URL) | other | checklist in plan §7>
+- Statuses: <Todo → In Progress → Test/QA → Done>; only the user's confirmation moves a task to Done.
+- Labels: type <bug, enhancement, documentation> · area <from the plan>
+- Every task has acceptance criteria that a tester can check. Skill: `write-issue`.
+
 ## Skills
 
 | Skill | Used by | For |

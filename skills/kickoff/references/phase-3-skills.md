@@ -6,6 +6,8 @@ Goal: the project has the few skills that will actually be used, chosen by the u
 
 From `docs/plan*`, list the recurring jobs: per-stack work (testing, debugging, deploying on this stack), process work (writing issues, QA reports, release notes), and domain methods (for a game: balancing; for a data project: validation). Aim for 3–8 jobs. One-off tasks don't need a skill.
 
+Always include **writing and maintaining tasks** when phase 2 chose a tracker (not a plan checklist). Default recommendation: **write our own** `write-issue` skill from `templates/skills/write-issue/SKILL.md`, filled with this project's repo, board, statuses and labels. It is what keeps every task's acceptance criteria checkable, which the tester and reviewer depend on. A QA-report skill (evidence comment on the issue before `Test/QA`) usually goes under "add when needed".
+
 ## 2. Search, in this order
 
 1. Already available in this session (the skills listed to you, and installed plugins). Free to use.

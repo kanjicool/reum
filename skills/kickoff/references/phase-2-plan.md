@@ -11,7 +11,12 @@ Goal: a plan an agent can execute one task at a time: the stack, the structure, 
    - Brownfield → don't propose a stack. Read manifests and the top-level layout, and document what is there.
 2. **Checks**: the exact commands for lint, format, type-check, tests, build and run. If none exist yet, setting them up is the first milestone. Phase 5 puts these into `AGENTS.md`.
 3. **The riskiest part**: schedule it early, with a fallback if it does not work.
-4. **Task tracking**: GitHub issues, another tracker, or a checklist in the plan. Each task needs acceptance criteria that can be checked.
+4. **Task tracking**: where tasks live. Each task needs acceptance criteria that can be checked. Offer, with a recommendation:
+   - **GitHub Issues + a GitHub Project board** (recommend when the repo is on GitHub and `gh` is available). Statuses follow the workflow's gates, e.g. `Todo → In Progress → Test/QA → Done`; `Done` only after the user confirms.
+   - **Another tracker** the user already uses (Linear, Jira, ...), through its MCP server or CLI if one is set up.
+   - **A checklist in the plan's status section**, for small or solo-short projects. Say this is what you recommend when the project is small.
+
+   Record the choice, the board name, the statuses and the label set (one type label + one or two area labels, areas taken from the plan) in `docs/.reum-state.md`. Don't create anything yet; phase 5 does, after asking.
 
 Facts from the web or docs: say where each came from. If you could not verify something, write "not verified".
 

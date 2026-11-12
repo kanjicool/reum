@@ -5,6 +5,7 @@ Written by the `kickoff` skill. Lets a new session resume without the old conver
 - Project type: <greenfield | docs only | brownfield>
 - Existing agent setup: <none | list of files>
 - Doc language: <...> · Agent-file language: <...>
+- Task tracker: <GitHub Issues + Project "<board name>" | other | plan checklist> · statuses: <...> · labels: <...>
 
 | Phase | Status | Output | Notes |
 |---|---|---|---|

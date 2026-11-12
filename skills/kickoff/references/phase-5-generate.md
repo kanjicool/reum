@@ -10,6 +10,8 @@ Goal: the files that make every future session cheap to start. Everything here i
 | `CLAUDE.md` | `templates/CLAUDE.md` | Only if the user works with Claude Code. First line imports `AGENTS.md`; the rest is Claude-specific. Target under 40 lines. |
 | `.claude/agents/<role>.md` | `templates/agents/*.md` | One per subagent role in `docs/workflow.md`. |
 | `docs/DEVLOG.md`, `docs/DEVLOG_ARCHIVE.md` | `templates/DEVLOG.md` | Only if the workflow has a work log. |
+| `.claude/skills/write-issue/SKILL.md` | `templates/skills/write-issue/SKILL.md` | If chosen in phase 3. Fill repo, board, statuses, labels. |
+| GitHub Project board, labels, first issues | see "Task tracker" below | Only if phase 2 chose GitHub. Ask first. |
 | `.claude/hooks/devlog-check.js` + entry in `.claude/settings.json` | `templates/hooks/devlog-check.js` | Optional. Ask first. Needs Node. |
 
 Other tools (Cursor, Codex, Gemini CLI) read `AGENTS.md` directly; don't create extra files for them unless the user asks.
@@ -27,6 +29,18 @@ They are loaded in every session, so every line costs every time.
 ## Subagents
 
 For each one: a description that says when to use it and what to pass in (it does not see the conversation), the tools it needs and no more (testers and reviewers get no edit tools), the model from `docs/workflow.md`, the steps, and a fixed short report format. Replace the template's generic steps with this project's real commands and paths.
+
+## Task tracker (if phase 2 chose GitHub)
+
+These write to GitHub, so show the user exactly what will be created and get a yes first.
+
+1. Check `gh auth status`. Projects need the `project` scope; if missing, ask the user to run `! gh auth refresh -s project`.
+2. **Board**: `gh project create --owner <owner> --title "<board name>"`, then `gh project link <number> --owner <owner> --repo <owner>/<repo>`. Check the Status options with `gh project field-list <number> --owner <owner> --format json`. A new board has `Todo`, `In Progress`, `Done`; if the workflow needs another status (e.g. `Test/QA`), ask the user to add it in the board's web UI (Status field → add option) unless you have verified an API way to do it.
+3. **Labels**: compare the agreed set with `gh label list`; create only the missing ones (`gh label create <name> --description "..."`).
+4. **First issues**: offer to file the tasks of the first milestone (not the whole plan) with the `write-issue` skill, each with acceptance criteria, added to the board as `Todo`.
+5. Put the board URL and the "how to list tasks" command into `AGENTS.md` (Task list row) and the skill.
+
+Never hard-code project or field ids in files; the skill looks them up at run time.
 
 ## Hook (optional)
 

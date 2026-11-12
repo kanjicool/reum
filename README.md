@@ -25,10 +25,10 @@ claude --plugin-dir /path/to/reum
 |---|---|---|
 | 0 สำรวจ | ดูว่าเป็นโปรเจคใหม่ มีแต่เอกสาร หรือมีโค้ดแล้ว | `docs/.reum-state.md` |
 | 1 Concept | ถามภาพรวม จุดประสงค์ ผลที่คาดหวัง ระยะเวลา ขอบเขต | `docs/concept.md` |
-| 2 Plan | ถาม stack กับตัวอย่าง ถ้าไม่มีจะค้นแล้วเสนอ จากนั้นแตกเป็น milestone | `docs/plan.md` หรือ `docs/plan/` |
-| 3 Skills | ค้น skill ที่เกี่ยวกับงาน สรุปเป็นตารางให้เลือก | skill ที่เลือกใน `.claude/skills/` |
+| 2 Plan | ถาม stack กับตัวอย่าง ถ้าไม่มีจะค้นแล้วเสนอ แตกเป็น milestone และเลือกที่ track งาน (GitHub Project, tracker อื่น หรือ checklist) | `docs/plan.md` หรือ `docs/plan/` |
+| 3 Skills | ค้น skill ที่เกี่ยวกับงาน สรุปเป็นตารางให้เลือก ถ้าใช้ tracker จะเสนอ `write-issue` เสมอ | skill ที่เลือกใน `.claude/skills/` |
 | 4 Workflow | เสนอ role, model ของแต่ละ role และขั้นตอนต่อหนึ่งงาน | `docs/workflow.md` |
-| 5 Generate | สร้างไฟล์ที่ agent อ่านทุก session | `AGENTS.md`, `CLAUDE.md`, `.claude/agents/`, `docs/DEVLOG.md` |
+| 5 Generate | สร้างไฟล์ที่ agent อ่านทุก session และถ้าตกลงจะสร้าง board, labels กับ issue ของ milestone แรก | `AGENTS.md`, `CLAUDE.md`, `.claude/agents/`, `.claude/skills/write-issue/`, `docs/DEVLOG.md` |
 
 ทุก phase จบด้วยการเขียนไฟล์และรอให้ผู้ใช้ตกลง หยุดกลางทางได้ พิมพ์ `/kickoff` ใน session ใหม่แล้วจะทำต่อจาก phase ที่ค้าง
 
