@@ -35,7 +35,21 @@ For each one: a description that says when to use it and what to pass in (it doe
 These write to GitHub, so show the user exactly what will be created and get a yes first.
 
 1. Check `gh auth status`. Projects need the `project` scope; if missing, ask the user to run `! gh auth refresh -s project`.
-2. **Board**: `gh project create --owner <owner> --title "<board name>"`, then `gh project link <number> --owner <owner> --repo <owner>/<repo>`. Check the Status options with `gh project field-list <number> --owner <owner> --format json`. A new board has `Todo`, `In Progress`, `Done`; if the workflow needs another status (e.g. `Test/QA`), ask the user to add it in the board's web UI (Status field → add option) unless you have verified an API way to do it.
+2. **Board**: `gh project create --owner <owner> --title "<board name>"`, then `gh project link <number> --owner <owner> --repo <owner>/<repo>`. A new board's Status field has `Todo`, `In Progress`, `Done`. If the workflow needs another status (e.g. `Test/QA`), add it with the GraphQL `updateProjectV2Field` mutation. The list you send **replaces** all options, so always send the existing ones back with their `id` (or every item's status is cleared), in the order the board should show them:
+
+```bash
+PROJECT_ID=$(gh project view <number> --owner <owner> --format json --jq .id)
+# Status field id and current options (color and description are required on write)
+gh api graphql -f query='query($p:ID!){ node(id:$p){ ... on ProjectV2 { field(name:"Status"){ ... on ProjectV2SingleSelectField { id options { id name color description } } } } } }' -f p="$PROJECT_ID"
+# Send every existing option with its id, plus the new one without an id
+gh api graphql -f query='mutation($f:ID!){ updateProjectV2Field(input:{ fieldId:$f, singleSelectOptions:[
+  {id:"<todo id>", name:"Todo", color:GRAY, description:""},
+  {id:"<in progress id>", name:"In Progress", color:YELLOW, description:""},
+  {name:"Test/QA", color:PURPLE, description:"Implemented and checked; waiting for the user"},
+  {id:"<done id>", name:"Done", color:GREEN, description:""} ] }){ projectV2Field { ... on ProjectV2SingleSelectField { options { id name } } } } }' -f f="<status field id>"
+```
+
+Copy each existing option's real `color` and `description` from the query. Check the result lists every old option with its old id plus the new one.
 3. **Labels**: compare the agreed set with `gh label list`; create only the missing ones (`gh label create <name> --description "..."`).
 4. **First issues**: offer to file the tasks of the first milestone (not the whole plan) with the `write-issue` skill, each with acceptance criteria, added to the board as `Todo`.
 5. Put the board URL and the "how to list tasks" command into `AGENTS.md` (Task list row) and the skill.
